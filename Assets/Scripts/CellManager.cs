@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class CellManager : Singleton<CellManager>
 {
-    [SerializeField] public static List<Cell2D> _cells = new List<Cell2D>();
-    public static List<Cell2D> _nextStageCells = new List<Cell2D>();
+    private static Cell2D _cellPrefab;
+    private static List<CellBase> _cellList = new List<CellBase>();
+    private static List<CellBase> _nextStageCellList = new List<CellBase>();
+    private static Queue<CellBase> _cellPoolQueue = new Queue<CellBase>();
 
     private void Update()
     {
-        Debug.Log(_cells.Count);
+        Debug.Log(_cellList.Count);
     }
     protected override void Awake()
     {
         base.Awake();
+        _cellPrefab = Resources.Load<Cell2D>("Cell2D");
     }
 
     private void Start()
@@ -23,36 +26,53 @@ public class CellManager : Singleton<CellManager>
 
     private void EvolveCells()
     {
-        foreach (Cell2D cell in _cells)
-            if (_nextStageCells.Contains(cell) == false)
-                Destroy(cell.gameObject);
-        _cells = new List<Cell2D>(_nextStageCells);
+        foreach (Cell2D cell in _cellList)
+            if (_nextStageCellList.Contains(cell) == false)
+                PutCellInPool(cell);
 
-        foreach (Cell2D cell in _cells)
+        _cellList = new List<CellBase>(_nextStageCellList);
+
+        foreach (Cell2D cell in _cellList)
             if (cell.IsAliveNow == true)
                 cell.Sprout();
 
-        foreach (Cell2D cell in _cells)
-            if (_nextStageCells.Contains(cell) == false)
-                Destroy(cell.gameObject);
-        _cells = new List<Cell2D>(_nextStageCells);
-        _nextStageCells.Clear();
+        foreach (Cell2D cell in _cellList)
+            if (_nextStageCellList.Contains(cell) == false)
+                PutCellInPool(cell);
+        _cellList = new List<CellBase>(_nextStageCellList);
+        _nextStageCellList.Clear();
 
-        foreach (Cell2D cell in _cells)
+        foreach (CellBase cell in _cellList)
             cell.Check();
 
-        foreach (Cell2D cell in _cells)
+        foreach (CellBase cell in _cellList)
             cell.UpdateState();
     }
 
-
-    public static void AddCell(Cell2D cell)
+    public static void AddCell(CellBase cell)
     {
-        _nextStageCells.Add(cell);
+        _nextStageCellList.Add(cell);
+    }
+    public static void SpawnCell(Vector2 position)
+    {
+        CellBase cell;
+
+        if (_cellPoolQueue.Count > 0)
+        {
+            cell = _cellPoolQueue.Dequeue();
+            cell.transform.position = position;
+            cell.GetFromPoolAction();
+        }
+        else
+            cell = Instantiate(_cellPrefab, position, Quaternion.identity);
+        
     }
 
-    public static void RemoveCell(Cell2D cell)
+
+    public void PutCellInPool(CellBase cell)
     {
-        _cells.Remove(cell);
+        cell.PutInPoolAction();
+        _cellPoolQueue.Enqueue(cell);
     }
+
 }

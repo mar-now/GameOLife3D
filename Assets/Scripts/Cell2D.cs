@@ -5,32 +5,12 @@ using UnityEditor;
 using UnityEngine;
 
 
-public class Cell2D : MonoBehaviour
+public class Cell2D : CellBase
 {
-    [SerializeField] public GameObject _cellPrefab;
-    [SerializeField] private SpriteRenderer _spriteRenderer;
-    [SerializeField] private bool _isAliveNow = false;
-    [SerializeField] private bool _isAliveLater = false;
-    public int _neigboursAlive;
-
-    public bool IsAliveNow 
-    { 
-        get => _isAliveNow; 
-        private set => _isAliveNow = value; 
-    }
-
-    private void Awake()
+    private void OnEnable()
     {
         CellManager.AddCell(this);
         this.name = "Cell " + transform.position.x + " " + transform.position.y;
-    }
-
-    private void Update()
-    {
-        if (IsAliveNow == true)
-            _spriteRenderer.color = Color.red;
-        else
-            _spriteRenderer.color = Color.white;
     }
 
     void CountNeighboursAlive()
@@ -61,37 +41,29 @@ public class Cell2D : MonoBehaviour
         _neigboursAlive = count;
     }
 
-    public void UpdateState()
-    {
-        IsAliveNow = _isAliveLater;
-    }
-
-    public void OnInstantiate()
-    {
-        IsAliveNow = false;
-        //Check();
-    }
-    public void Check()
+    public override void Check()
     {
         CountNeighboursAlive();
 
+        if(_neigboursAlive > 0)
+        { 
         if (IsAliveNow == true && (_neigboursAlive == 2 || _neigboursAlive == 3))
         {
             _isAliveLater = true;
-            //CellManager.AddCell(this);
+            CellManager.AddCell(this);
         }
         else if (IsAliveNow == false && _neigboursAlive == 3)
         {
             _isAliveLater = true;
-            //CellManager.AddCell(this);
+            CellManager.AddCell(this);
         }
         else
             _isAliveLater = false;
+        }
 
-        CellManager.AddCell(this);
     }
 
-    public void Sprout()
+    public override void Sprout()
     {
         if (IsAliveNow == false)
             return;
@@ -111,9 +83,8 @@ public class Cell2D : MonoBehaviour
 
                 if (hit.collider == null)
                 {
-                    Cell2D cell = Instantiate(_cellPrefab, neigbourPos, Quaternion.identity).GetComponent<Cell2D>();
+                    CellManager.SpawnCell(neigbourPos);
                     Debug.Log(transform.name + " sprout");
-                    cell.OnInstantiate();
                 }
             }
         }
