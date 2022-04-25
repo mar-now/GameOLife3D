@@ -17,15 +17,28 @@ public abstract class CellBase : MonoBehaviour
         private set => _isAliveNow = value;
     }
 
+    private void Awake()
+    {
+        transform.SetParent(CellManager.Instance.transform);
+    }
     private void Update()
     {
-        if (IsAliveNow == true)
-            _spriteRenderer.color = Color.red;
+        Color tmp = _spriteRenderer.color;
+
+        if (_isAliveNow == true)
+            tmp.a = 255;
         else
-            _spriteRenderer.color = Color.white;
+            tmp.a = 0;
+
+        _spriteRenderer.color = tmp;
+            
     }
 
+    // Function putting the cell in the next stage's list, if conditions are met
     public abstract void Check();
+
+    // Function spawning new cells around living cell, so the new cells cn come alive
+    // in future steps of evolution
     public abstract void Sprout();
 
     public void PutInPoolAction()

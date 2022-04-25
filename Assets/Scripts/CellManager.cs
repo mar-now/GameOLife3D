@@ -9,39 +9,52 @@ public class CellManager : Singleton<CellManager>
     private static List<CellBase> _nextStageCellList = new List<CellBase>();
     private static Queue<CellBase> _cellPoolQueue = new Queue<CellBase>();
 
+    private static float _simulationSpeed = 0.15f;
+    private static bool _isSimulationPaused = false;
+    private static float timeSinceLastEvolve = 0;
+
+
     private void Update()
     {
         Debug.Log(_cellList.Count);
+
+        timeSinceLastEvolve += Time.deltaTime;
+        if (_isSimulationPaused == false && timeSinceLastEvolve >= _simulationSpeed)
+        {
+            EvolveCells();
+            timeSinceLastEvolve = 0;
+        }
     }
     protected override void Awake()
     {
         base.Awake();
         _cellPrefab = Resources.Load<Cell2D>("Cell2D");
-    }
 
-    private void Start()
-    {
-        InvokeRepeating("EvolveCells", 1f, 0.125f);
     }
 
     private void EvolveCells()
     {
+        // Putting the cells which aren't present in the next stage in pool
         foreach (Cell2D cell in _cellList)
             if (_nextStageCellList.Contains(cell) == false)
                 PutCellInPool(cell);
 
+        // Moving the cells from the next stage list to the current stage list
         _cellList = new List<CellBase>(_nextStageCellList);
 
+        // Spawning new cells around living ones
+        // New cells are dead, but they may come alive in the next stage
         foreach (Cell2D cell in _cellList)
             if (cell.IsAliveNow == true)
                 cell.Sprout();
 
-        foreach (Cell2D cell in _cellList)
-            if (_nextStageCellList.Contains(cell) == false)
-                PutCellInPool(cell);
+        // After Sprout() _nexStageCellList contains new cells, so I'm moving them
+        // once again to the current stage list and clear the next stage list
         _cellList = new List<CellBase>(_nextStageCellList);
         _nextStageCellList.Clear();
 
+        // Checking wheter the cells shoud be present in the next stage list and
+        // puttting them there
         foreach (CellBase cell in _cellList)
             cell.Check();
 
@@ -69,10 +82,14 @@ public class CellManager : Singleton<CellManager>
     }
 
 
-    public void PutCellInPool(CellBase cell)
+    public static void PutCellInPool(CellBase cell)
     {
         cell.PutInPoolAction();
         _cellPoolQueue.Enqueue(cell);
     }
 
+    public Transform GetTransform()
+    {
+        return Instance.transform;
+    }
 }

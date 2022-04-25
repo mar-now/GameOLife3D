@@ -41,28 +41,30 @@ public class Cell2D : CellBase
         _neigboursAlive = count;
     }
 
+    // Function putting the cell in the next stage's list, if conditions are met
     public override void Check()
     {
         CountNeighboursAlive();
 
-        if(_neigboursAlive > 0)
-        { 
-        if (IsAliveNow == true && (_neigboursAlive == 2 || _neigboursAlive == 3))
+        // If there is at least one neigbour alive, we're addin the cell to the next stage's list
+        // Thanks to this, we'll avoid removing cell's which would be respawned in nearest Sprout() call
+        if (_neigboursAlive > 0)
         {
-            _isAliveLater = true;
-            CellManager.AddCell(this);
-        }
-        else if (IsAliveNow == false && _neigboursAlive == 3)
-        {
-            _isAliveLater = true;
+            if (IsAliveNow == true && (_neigboursAlive == 2 || _neigboursAlive == 3))
+                _isAliveLater = true;
+            else if (IsAliveNow == false && _neigboursAlive == 3)
+                _isAliveLater = true;
+            else
+                _isAliveLater = false;
+
             CellManager.AddCell(this);
         }
         else
             _isAliveLater = false;
-        }
-
     }
 
+    // Function spawning new cells around living cell, so the new cells cn come alive
+    // in future steps of evolution
     public override void Sprout()
     {
         if (IsAliveNow == false)
@@ -84,11 +86,11 @@ public class Cell2D : CellBase
                 if (hit.collider == null)
                 {
                     CellManager.SpawnCell(neigbourPos);
-                    Debug.Log(transform.name + " sprout");
+                    //Debug.Log(transform.name + " sprout");
                 }
             }
         }
-
-        //Debug.Break();
     }
 }
+
+
