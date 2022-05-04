@@ -4,8 +4,6 @@ using UnityEngine;
 
 public abstract class CellBase : MonoBehaviour
 {
-
-    [SerializeField] public GameObject _cellPrefab;
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] protected bool _isAliveNow = false;
     [SerializeField] protected bool _isAliveLater = false;
@@ -14,12 +12,25 @@ public abstract class CellBase : MonoBehaviour
     public bool IsAliveNow
     {
         get => _isAliveNow;
-        private set => _isAliveNow = value;
+        set => _isAliveNow = value;
     }
+    public bool IsAliveLater { get => _isAliveLater; set => _isAliveLater = value; }
 
     private void Awake()
     {
         transform.SetParent(CellManager.Instance.transform);
+    }
+
+    private void Start()
+    {
+        Color tmp = _spriteRenderer.color;
+
+        if (_isAliveNow == true)
+            tmp.a = 255;
+        else
+            tmp.a = 0;
+
+        _spriteRenderer.color = tmp;
     }
     private void Update()
     {

@@ -10,7 +10,7 @@ public class CameraControl : MonoBehaviour
     [SerializeField] private float _boostMoveSpeed = 0.5f;
     [SerializeField] private float _defaultZoomSpeed = 0.3f;
     [SerializeField] private float _boostZoomSpeed = 1.2f;
-    [SerializeField] private float _mouseWheelMultiplier = 30;
+    [SerializeField] private float _mouseWheelMultiplier = 80;
     private Vector3 newPosition;
     [SerializeField] private float _movementTime = 5;
 
@@ -29,11 +29,11 @@ public class CameraControl : MonoBehaviour
         // There's also a hardcoded multiplier so the values look more reasonable compared
         // to the movement speed in the editor.
         // Keyboard zoom-in
-        if (Input.GetKey(KeyCode.Space) == true && camera.orthographicSize <= 200)
+        if (Input.GetKey(KeyCode.Space) == true && camera.orthographicSize <= 400)
             camera.orthographicSize += (Input.GetKey(KeyCode.RightShift) ? _boostZoomSpeed : _defaultZoomSpeed) 
                 * Time.deltaTime * 10;
         // Mousewheel zoom-in
-        else if(Input.GetAxis("Mouse ScrollWheel") < 0f && camera.orthographicSize <= 200)
+        else if(Input.GetAxis("Mouse ScrollWheel") < 0f && camera.orthographicSize <= 400)
             camera.orthographicSize += (Input.GetKey(KeyCode.RightShift) ? _boostZoomSpeed : _defaultZoomSpeed) 
                 * Time.deltaTime * _mouseWheelMultiplier * 10;
         // Keyboard zoom-out
@@ -46,7 +46,7 @@ public class CameraControl : MonoBehaviour
 
         // Camera movement
         newPosition += new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0) * 
-            (Input.GetKey(KeyCode.RightShift) ? _boostMoveSpeed : _defaultMoveSpeed);
+            (Input.GetKey(KeyCode.RightShift) ? _boostMoveSpeed : _defaultMoveSpeed) * camera.orthographicSize / 50;
 
         transform.position = Vector3.Lerp(transform.position, newPosition, _movementTime * Time.deltaTime);
     }

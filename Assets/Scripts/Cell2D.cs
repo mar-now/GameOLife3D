@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-
-public class Cell2D : CellBase
+public class Cell2D : CellBase, IPointerDownHandler
 {
+    /*private void Awake()
+    {
+        if(transform.parent.gameObject != CellManager)
+    }*/
     private void OnEnable()
     {
-        CellManager.AddCell(this);
         this.name = "Cell " + transform.position.x + " " + transform.position.y;
+        CellManager.AddCell(this);
     }
-
     void CountNeighboursAlive()
     {
         int count = 0;
@@ -60,7 +63,10 @@ public class Cell2D : CellBase
             CellManager.AddCell(this);
         }
         else
+        {
             _isAliveLater = false;
+            CellManager.SchedulePuttinInPool(this);
+        }
     }
 
     // Function spawning new cells around living cell, so the new cells cn come alive
@@ -81,15 +87,19 @@ public class Cell2D : CellBase
 
                 neigbourPos.x = transform.position.x + x;
                 neigbourPos.y = transform.position.y + y;
-                RaycastHit2D hit = Physics2D.Raycast((neigbourPos), neigbourPos, 0.1f);
 
-                if (hit.collider == null)
+                if (CellManager.GetCellAtPosition(neigbourPos) == null)
                 {
                     CellManager.SpawnCell(neigbourPos);
                     //Debug.Log(transform.name + " sprout");
                 }
             }
         }
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        Debug.Log(gameObject.name + " click");
     }
 }
 
