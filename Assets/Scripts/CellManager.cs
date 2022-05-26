@@ -13,7 +13,9 @@ public class CellManager : Singleton<CellManager>
 
     private static float timeSinceLastEvolve = 0;
 
-
+    [SerializeField] private int _simulationFieldWidth = 10000;
+    [SerializeField] private int _simulationFieldHeight = 10000;
+    [SerializeField] private int _simulationFieldDepth = 10000;
 
     private void Update()
     {
@@ -34,6 +36,10 @@ public class CellManager : Singleton<CellManager>
 
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(transform.position, new Vector3(_simulationFieldWidth, _simulationFieldHeight));
+    }
     private void EvolveCells()
     {
         // Putting the cells which aren't present in the next stage in pool
@@ -62,6 +68,17 @@ public class CellManager : Singleton<CellManager>
 
         foreach (CellBase cell in _cellList)
             cell.UpdateState();
+    }
+
+    public bool CheckIfCellIsOutOfBounds(CellBase cell)
+    {
+        Vector3 position = cell.transform.position;
+        if (position.x < -(_simulationFieldWidth / 2) || position.x > (_simulationFieldWidth / 2) ||
+            position.y < -(_simulationFieldHeight / 2) || position.y > (_simulationFieldHeight / 2) ||
+            position.z < -(_simulationFieldDepth / 2) || position.z > (_simulationFieldDepth / 2))
+            return true;
+        else
+            return false;
     }
 
     public void AddCell(CellBase cell)

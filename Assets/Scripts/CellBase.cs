@@ -46,7 +46,21 @@ public abstract class CellBase : MonoBehaviour
     }
 
     // Function putting the cell in the next stage's list, if conditions are met
-    public abstract void Check();
+    // further implementation in child classes
+    public virtual void Check()
+    {
+        if (_isAliveNow == true && CellManager.Instance.CheckIfCellIsOutOfBounds(this) == true)
+        {
+            _isAliveNow = false;
+            _isAliveLater = false;
+            CellManager.Instance.SchedulePuttinInPool(this);
+            return;
+        }
+
+        CountNeighboursAlive();
+    }
+
+    public abstract void CountNeighboursAlive();
 
     // Function spawning new cells around living cell, so the new cells cn come alive
     // in future steps of evolution

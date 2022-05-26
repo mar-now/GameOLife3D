@@ -7,16 +7,12 @@ using UnityEngine.EventSystems;
 
 public class Cell2D : CellBase, IPointerDownHandler
 {
-    /*private void Awake()
-    {
-        if(transform.parent.gameObject != CellManager)
-    }*/
     private void OnEnable()
     {
         this.name = "Cell " + transform.position.x + " " + transform.position.y;
         CellManager.Instance.AddCell(this);
     }
-    void CountNeighboursAlive()
+    public override void CountNeighboursAlive()
     {
         int count = 0;
         Vector2 neigbourPos = new Vector2();
@@ -47,7 +43,7 @@ public class Cell2D : CellBase, IPointerDownHandler
     // Function putting the cell in the next stage's list, if conditions are met
     public override void Check()
     {
-        CountNeighboursAlive();
+        base.Check();
 
         // If there is at least one neigbour alive, we're addin the cell to the next stage's list
         // Thanks to this, we'll avoid removing cell's which would be respawned in nearest Sprout() call
