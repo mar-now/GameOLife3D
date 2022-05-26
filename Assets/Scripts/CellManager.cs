@@ -20,7 +20,7 @@ public class CellManager : Singleton<CellManager>
        // Debug.Log(_cellList.Count);
 
         timeSinceLastEvolve += Time.deltaTime;
-        if (GamestateManager.IsSimulationPaused == false && timeSinceLastEvolve >=  1f / GamestateManager.SimulationSpeed)
+        if (GameManager.IsSimulationPaused == false && timeSinceLastEvolve >=  1f / GameManager.SimulationSpeed)
         {
             EvolveCells();
             timeSinceLastEvolve = 0;
@@ -30,7 +30,7 @@ public class CellManager : Singleton<CellManager>
     protected override void Awake()
     {
         base.Awake();
-        _cellPrefab = Resources.Load<Cell2D>("Cell2D");
+        _cellPrefab = Resources.Load<Cell2D>("Prefabs/2D/Cell2D");
 
     }
 
@@ -68,7 +68,7 @@ public class CellManager : Singleton<CellManager>
     {
         _nextStageCellList.Add(cell);
     }
-    public static void SpawnCell(Vector2 position)
+    public static void SpawnCell(Vector2 position, bool isAliveNow = false)
     {
         CellBase cell;
 
@@ -80,7 +80,8 @@ public class CellManager : Singleton<CellManager>
         }
         else
             cell = Instantiate(_cellPrefab, position, Quaternion.identity);
-        
+
+        cell.IsAliveNow = isAliveNow;
     }
 
     public static void SchedulePuttinInPool(CellBase cell)

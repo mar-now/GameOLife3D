@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GamestateManager : Singleton<GamestateManager>
+public class GameManager : Singleton<GameManager>
 {
     [SerializeField] TMP_Text speedDisplay;
     [SerializeField] Button pauseButton;

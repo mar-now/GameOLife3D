@@ -49,11 +49,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 500515263745488914, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 500515263745488914, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 500515263745488914, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -87,13 +87,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3895383155991116084, guid: 871711435b015444198a240ed9f47bb0, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6286099966072770373, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: m_Name
-      value: Cell2D (8)
+      value: Cell2D
+      objectReference: {fileID: 0}
+    - target: {fileID: 7780404468346457249, guid: 871711435b015444198a240ed9f47bb0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7780404468346457249, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: _isAliveNow
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7780404468346457249, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: _isAliveLater
@@ -119,11 +127,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 500515263745488914, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 500515263745488914, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 500515263745488914, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -157,13 +165,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3895383155991116084, guid: 871711435b015444198a240ed9f47bb0, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6286099966072770373, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: m_Name
-      value: Cell2D (9)
+      value: Cell2D
+      objectReference: {fileID: 0}
+    - target: {fileID: 7780404468346457249, guid: 871711435b015444198a240ed9f47bb0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7780404468346457249, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: _isAliveNow
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7780404468346457249, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: _isAliveLater
@@ -189,11 +205,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 500515263745488914, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 500515263745488914, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 500515263745488914, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -227,13 +243,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3895383155991116084, guid: 871711435b015444198a240ed9f47bb0, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6286099966072770373, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: m_Name
-      value: Cell2D (10)
+      value: Cell2D
+      objectReference: {fileID: 0}
+    - target: {fileID: 7780404468346457249, guid: 871711435b015444198a240ed9f47bb0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7780404468346457249, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: _isAliveNow
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7780404468346457249, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: _isAliveLater
@@ -259,11 +283,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 500515263745488914, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 500515263745488914, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 500515263745488914, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -297,13 +321,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3895383155991116084, guid: 871711435b015444198a240ed9f47bb0, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6286099966072770373, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: m_Name
-      value: Cell2D (16)
+      value: Cell2D
+      objectReference: {fileID: 0}
+    - target: {fileID: 7780404468346457249, guid: 871711435b015444198a240ed9f47bb0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7780404468346457249, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: _isAliveNow
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7780404468346457249, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: _isAliveLater
@@ -329,11 +361,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 500515263745488914, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 500515263745488914, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 500515263745488914, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -367,17 +399,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3895383155991116084, guid: 871711435b015444198a240ed9f47bb0, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6286099966072770373, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: m_Name
-      value: Cell2D (17)
+      value: Cell2D
+      objectReference: {fileID: 0}
+    - target: {fileID: 7780404468346457249, guid: 871711435b015444198a240ed9f47bb0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7780404468346457249, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: _isAliveNow
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7780404468346457249, guid: 871711435b015444198a240ed9f47bb0, type: 3}
       propertyPath: _isAliveLater
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 871711435b015444198a240ed9f47bb0, type: 3}
