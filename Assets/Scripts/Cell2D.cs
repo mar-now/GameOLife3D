@@ -14,7 +14,7 @@ public class Cell2D : CellBase, IPointerDownHandler
     private void OnEnable()
     {
         this.name = "Cell " + transform.position.x + " " + transform.position.y;
-        CellManager.AddCell(this);
+        CellManager.Instance.AddCell(this);
     }
     void CountNeighboursAlive()
     {
@@ -60,12 +60,12 @@ public class Cell2D : CellBase, IPointerDownHandler
             else
                 _isAliveLater = false;
 
-            CellManager.AddCell(this);
+            CellManager.Instance.AddCell(this);
         }
         else
         {
             _isAliveLater = false;
-            CellManager.SchedulePuttinInPool(this);
+            CellManager.Instance.SchedulePuttinInPool(this);
         }
     }
 
@@ -88,9 +88,9 @@ public class Cell2D : CellBase, IPointerDownHandler
                 neigbourPos.x = transform.position.x + x;
                 neigbourPos.y = transform.position.y + y;
 
-                if (CellManager.GetCellAtPosition(neigbourPos) == null)
+                if (CellManager.Instance.GetCellAtPosition(neigbourPos) == null)
                 {
-                    CellManager.SpawnCell(neigbourPos);
+                    CellManager.Instance.SpawnCell(neigbourPos);
                     //Debug.Log(transform.name + " sprout");
                 }
             }

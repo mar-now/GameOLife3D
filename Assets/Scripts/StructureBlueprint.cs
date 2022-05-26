@@ -29,7 +29,7 @@ public class StructureBlueprint : MonoBehaviour
     public bool AreThereLivingCellsUnderTheBlueprint()
     {
         foreach(Transform child in transform)
-            if (CellManager.GetCellAtPosition(transform.position) != null)
+            if (CellManager.Instance.GetCellAtPosition(transform.position) != null)
                 return true;
 
         return false;

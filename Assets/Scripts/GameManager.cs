@@ -9,20 +9,26 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] TMP_Text speedDisplay;
     [SerializeField] Button pauseButton;
     Image pauseButtonImage;
-    private static float _simulationSpeed = 2f;
-    private static bool _isSimulationPaused = false;
+    private float _simulationSpeed = 4f;
+    private bool _isSimulationPaused = false;
 
-    public static float SimulationSpeed { get => _simulationSpeed; set => _simulationSpeed = value; }
-    public static bool IsSimulationPaused { get => _isSimulationPaused; set => _isSimulationPaused = value; }
+    public float SimulationSpeed { get => _simulationSpeed; set => _simulationSpeed = value; }
+    public bool IsSimulationPaused { get => _isSimulationPaused; set => _isSimulationPaused = value; }
 
     private void Awake()
     {
         base.Awake();
-        pauseButtonImage = pauseButton.GetComponent<Image>();
-        speedDisplay.text = "Speed: x" + _simulationSpeed;
+
+        if(pauseButton != null)
+            pauseButtonImage = pauseButton.GetComponent<Image>();
+        if(speedDisplay != null)
+            speedDisplay.text = "Speed: x" + _simulationSpeed;
     }
     public void TogglePause()
     {
+        if (pauseButton == null)
+            return;
+
         if (_isSimulationPaused == true)
         {
             _isSimulationPaused = false;
@@ -40,7 +46,8 @@ public class GameManager : Singleton<GameManager>
         if (_simulationSpeed < 16)
             _simulationSpeed *= 2;
 
-        speedDisplay.text = "Speed: x" + _simulationSpeed;
+        if(speedDisplay != null)
+            speedDisplay.text = "Speed: x" + _simulationSpeed;
     }
 
     public void LowerSimSpeed()
@@ -48,6 +55,7 @@ public class GameManager : Singleton<GameManager>
         if (_simulationSpeed > 0.5f)
             _simulationSpeed /= 2;
 
-        speedDisplay.text = "Speed: x" + _simulationSpeed;
+        if (speedDisplay != null)
+            speedDisplay.text = "Speed: x" + _simulationSpeed;
     }
 }

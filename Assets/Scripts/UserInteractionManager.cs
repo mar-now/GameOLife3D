@@ -35,12 +35,12 @@ public class UserInteractionManager : Singleton<UserInteractionManager>
             pos.z = 0;
             pos = pos.Round();
 
-            CellBase cell = CellManager.GetCellAtPosition(pos);
+            CellBase cell = CellManager.Instance.GetCellAtPosition(pos);
 
             if (cell != null)
                 cell.IsAliveNow = !cell.IsAliveNow;
             else
-                CellManager.SpawnCell(pos, true);
+                CellManager.Instance.SpawnCell(pos, true);
         }
     }
 }

@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class CellManager : Singleton<CellManager>
 {
-    private static Cell2D _cellPrefab;
-    private static List<CellBase> _cellList = new List<CellBase>();
-    private static List<CellBase> _nextStageCellList = new List<CellBase>();
-    private static List<CellBase> _cellsToBePooled = new List<CellBase>();
-    private static Queue<CellBase> _cellPoolQueue = new Queue<CellBase>();
+    private Cell2D _cellPrefab;
+    private List<CellBase> _cellList = new List<CellBase>();
+    private List<CellBase> _nextStageCellList = new List<CellBase>();
+    private List<CellBase> _cellsToBePooled = new List<CellBase>();
+    private Queue<CellBase> _cellPoolQueue = new Queue<CellBase>();
 
     private static float timeSinceLastEvolve = 0;
 
@@ -20,7 +20,7 @@ public class CellManager : Singleton<CellManager>
        // Debug.Log(_cellList.Count);
 
         timeSinceLastEvolve += Time.deltaTime;
-        if (GameManager.IsSimulationPaused == false && timeSinceLastEvolve >=  1f / GameManager.SimulationSpeed)
+        if (GameManager.Instance.IsSimulationPaused == false && timeSinceLastEvolve >=  1f / GameManager.Instance.SimulationSpeed)
         {
             EvolveCells();
             timeSinceLastEvolve = 0;
@@ -64,11 +64,11 @@ public class CellManager : Singleton<CellManager>
             cell.UpdateState();
     }
 
-    public static void AddCell(CellBase cell)
+    public void AddCell(CellBase cell)
     {
         _nextStageCellList.Add(cell);
     }
-    public static void SpawnCell(Vector2 position, bool isAliveNow = false)
+    public void SpawnCell(Vector2 position, bool isAliveNow = false)
     {
         CellBase cell;
 
@@ -84,11 +84,11 @@ public class CellManager : Singleton<CellManager>
         cell.IsAliveNow = isAliveNow;
     }
 
-    public static void SchedulePuttinInPool(CellBase cell)
+    public void SchedulePuttinInPool(CellBase cell)
     {
         _cellsToBePooled.Add(cell);
     }
-    public static void PutCellInPool(CellBase cell)
+    public void PutCellInPool(CellBase cell)
     {
         cell.PutInPoolAction();
         _cellPoolQueue.Enqueue(cell);
@@ -99,7 +99,7 @@ public class CellManager : Singleton<CellManager>
         return Instance.transform;
     }
 
-    public static Cell2D GetCellAtPosition(Vector2 position)
+    public Cell2D GetCellAtPosition(Vector2 position)
     {
         // Rounding coordinates, because position of centre of the cell has only integer values
         position.x = Mathf.RoundToInt(position.x);
