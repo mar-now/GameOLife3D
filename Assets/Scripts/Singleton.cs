@@ -38,7 +38,8 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
 	protected virtual void Awake()
 	{
-		if (_instance == null) _instance = gameObject.GetComponent<T>();
+		if (_instance == null) 
+			_instance = gameObject.GetComponent<T>();
 		else if (_instance.GetInstanceID() != GetInstanceID())
 		{
 			Destroy(gameObject);

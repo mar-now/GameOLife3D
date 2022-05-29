@@ -13,6 +13,12 @@ public class CellManager : Singleton<CellManager>
 
     private static float timeSinceLastEvolve = 0;
 
+    private float _simulationSpeed = 4f;
+    private bool _isSimulationPaused = false;
+
+    public float SimulationSpeed { get => _simulationSpeed; set => _simulationSpeed = value; }
+    public bool IsSimulationPaused { get => _isSimulationPaused; set => _isSimulationPaused = value; }
+
     [SerializeField] private int _simulationFieldWidth = 10000;
     [SerializeField] private int _simulationFieldHeight = 10000;
     [SerializeField] private int _simulationFieldDepth = 10000;
@@ -22,7 +28,7 @@ public class CellManager : Singleton<CellManager>
        // Debug.Log(_cellList.Count);
 
         timeSinceLastEvolve += Time.deltaTime;
-        if (GameManager.Instance.IsSimulationPaused == false && timeSinceLastEvolve >=  1f / GameManager.Instance.SimulationSpeed)
+        if (_isSimulationPaused == false && timeSinceLastEvolve >=  1f / _simulationSpeed)
         {
             EvolveCells();
             timeSinceLastEvolve = 0;
